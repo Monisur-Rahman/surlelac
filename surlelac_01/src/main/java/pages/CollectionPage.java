@@ -22,6 +22,7 @@ public class CollectionPage {
 	@FindBy(xpath = "//a[@href='/products/101-t-shirt']")
 	private WebElement firstProduct;
 	
+	//XL
 	@FindBy(xpath = "//label[@for='template--15566425686190__main-2-3']")
 	private WebElement xlargeSize;
 	
