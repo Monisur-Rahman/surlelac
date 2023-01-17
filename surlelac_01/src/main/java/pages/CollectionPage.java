@@ -16,6 +16,9 @@ import Utilities.TestUtil;
 public class CollectionPage {
 	public WebDriver driver = null;
 	public static JavascriptExecutor js;
+	
+	@FindBy(xpath="//button[contains(@class,'needsclick kla')]")
+	private WebElement popup;
 
 //	To find WebElement for first_Product
 	
@@ -23,13 +26,13 @@ public class CollectionPage {
 	private WebElement firstProduct;
 	
 	//XL
-	@FindBy(xpath = "//label[@for='template--15566425686190__main-2-3']")
+	@FindBy(xpath = "//label[@title='XL']")
 	private WebElement xlargeSize;
 	
 	@FindBy(xpath = "//li//label[@title='XXL']")
 	private WebElement scrolToCart;
 	
-	@FindBy(xpath = "//div//button[@name='add']")
+	@FindBy(xpath = "//button[contains(@class,'product-form__')]")
 	private WebElement addtoCart;
 	
 	@FindBy(xpath = "//a[@id='cart-notification-button']")
@@ -97,11 +100,14 @@ public class CollectionPage {
 	public CollectionPage(WebDriver driver)
 	{
 		this.driver = driver;
-		PageFactory.initElements(this.driver,this);  // D
+		PageFactory.initElements(this.driver,this);  
 	}
 	
 	
 												//	Methods for First_Product
+	public void closePop() {
+		popup.click();
+	}
 	
 	public boolean clickFirstProduct() 
 	{
@@ -110,9 +116,9 @@ public class CollectionPage {
 //			Base_test.waitExplicitMethod(driver, firstProduct);
 			Base_test.isElementVisible(driver, firstProduct, "firstProduct is visible");
 			firstProduct.click();
-			TestUtil.log().info("firstProduct is clicked");
-			result = true;
+			TestUtil.log().info("click on firstproduct");
 			ExtentReport.test.log(Status.PASS," Click first Product");
+			result = true;
 		}
 		catch(Exception e) {
 			ExtentReport.test.log(Status.FAIL,"Failed to click on first Product");
@@ -123,21 +129,7 @@ public class CollectionPage {
 	}
 	
 	
-//	public void scrollAddtoCart() throws InterruptedException
-//	{
-////		boolean result = false;
-//		try {
-//			js = (JavascriptExecutor) driver;
-//			js.executeScript("arguments[0].scrollIntoView(true);", scrolToCart);
-//			System.out.println("before");
-//			Thread.sleep(2000);
-////			result = true;
-//		}
-//		catch(Exception e) {
-//			System.out.println(e);
-//		}
-////		return result;
-//	} 
+ 
 	
 	
 	                                      
@@ -149,21 +141,27 @@ public class CollectionPage {
 //			js = (JavascriptExecutor) driver;
 //			js.executeScript("arguments[0].click();", xlargeSize);
 			xlargeSize.click();
+			TestUtil.log().info("click on XL size");
+			ExtentReport.test.log(Status.PASS," Click on XL Size");
 			result = true;
 		}
 		catch(Exception e) {
-			System.out.println(e);
+//			System.out.println(e);
+			TestUtil.log().error(e);
+			ExtentReport.test.log(Status.FAIL,"Failed to click on XL Size");
 		}
 		return result;
 //		xlargeSize.click();
 	}
 	
-//	public void scrollAddtoCart1() throws InterruptedException {
-//		js = (JavascriptExecutor) driver;
-//		js.executeScript("arguments[0].scrollIntoView(true);", scrolToCart);
-//		Base_test.isElementVisible(driver, scrolToCart, "Successfully scroll");
-////		Base_test.waitExplicitMethod(driver, scrolToCart);
-//	}
+	public void scrollAddtoCart1() throws InterruptedException {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", scrolToCart);
+		Base_test.isElementVisible(driver, scrolToCart, "Successfully scroll");
+//		Base_test.waitExplicitMethod(driver, scrolToCart);
+		TestUtil.log().info("click on scrollAddToCart");
+		ExtentReport.test.log(Status.PASS," scroll to AddtoCart1");
+	}
 	
 	
 	
@@ -174,12 +172,15 @@ public class CollectionPage {
 			Base_test.waitExplicitMethod(driver, addtoCart);
 //			System.out.println("Hi");
 			addtoCart.click();
-//			System.out.println("Method Called");
+			TestUtil.log().info("click on addToCart");
 			Base_test.waitExplicitMethod(driver, addtoCart);
+			ExtentReport.test.log(Status.PASS," Click on addtoCart");
 			result = true;
 		}
 		catch(Exception e) {
-			System.out.println(e);
+//			System.out.println(e);
+			TestUtil.log().error(e);
+			ExtentReport.test.log(Status.FAIL,"Failed to click on addtoCart");
 		}
 		return result;
 	}
@@ -191,11 +192,15 @@ public class CollectionPage {
 		try {
 			Base_test.waitExplicitMethod(driver, view_myCart);
 			view_myCart.click();
+			TestUtil.log().info("click on viewCart");
+			ExtentReport.test.log(Status.PASS," Click on view myCart");
 			result = true;
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+//			System.out.println(e);
+			TestUtil.log().error(e);
+			ExtentReport.test.log(Status.FAIL,"Failed to click on view myCart");
 		}
 		return result;
 	}
@@ -205,6 +210,8 @@ public class CollectionPage {
 		js.executeScript("arguments[0].scrollIntoView(true);", scrollToCheckOut);
 		System.out.println("before");
 		Base_test.waitExplicitMethod(driver, scrollToCheckOut);
+		TestUtil.log().info("scroll to checkout");
+
 		}
 	
 	
@@ -215,112 +222,22 @@ public class CollectionPage {
 		try {
 			Base_test.waitExplicitMethod(driver, checkOut);
 			checkOut.click();
-			System.out.println("checkout Clicked");
+//			System.out.println("checkout Clicked");
+			TestUtil.log().info("click on checkout");
+			ExtentReport.test.log(Status.PASS," Click on checkout");
 			result = true;
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+//			System.out.println(e);
+			TestUtil.log().error(e);
+			ExtentReport.test.log(Status.FAIL,"Failed to click on checkout");
 		}
 		return result;
 	}
 	
 	
-												//	Methods for Sixth_Product
-	
-//	public void scrollSixthProduct() {
-//		JavascriptExecutor js = (JavascriptExecutor) driver;
-//		js.executeScript("arguments[0].scrollIntoView(true);", sixthProduct);
-//	}
-//	
-//	public void clickSixthProduct() {
-//		sixthProduct.click();
-//	}
-//	
-//	public void clickSixthLargeSize() {
-//		sixthLargeSize.click();
-//	}
-//
-//	public void clickSixthAddtoCart() {
-//		sixthAddtoCart.click();
-//	}
-//
-//	public void clickSixthViewMyCart() {
-//		sixthViewMyCart.click();
-//	}
-//
-//	public void scrolltoCheckOut() throws InterruptedException {
-//		JavascriptExecutor js = (JavascriptExecutor) driver;
-//		js.executeScript("arguments[0].scrollIntoView(true);", sixthCheckOut);
-//		Thread.sleep(4000);
-//	}
-
-//	public void clickSixthCheckOut() {
-//		sixthCheckOut.click();
-//	}
-	    											
-	
-												// Info
-	
-//	public void enterSixthEmail() {	
-//		sixthEmail.click();
-//		sixthEmail.sendKeys("test@test.com");	
-//	}
-//	
-//	public void enteSixthfirstName() {	
-//		sixthFirstName.click();
-//		sixthFirstName.sendKeys("Monisur");
-//	}
-//	
-//	public void enterSixthlastName() {
-//		sixthLastName.click();
-//		sixthLastName.sendKeys("Rahman");
-//	}
-//	
-//	
-//	public void enterSixthAddress() {
-//		sixthAddress1.click();
-//		sixthAddress1.sendKeys("kamptee");
-//	}	
-//	
-//	public void scrollAddress2() throws InterruptedException {
-//	JavascriptExecutor js = (JavascriptExecutor) driver;
-//	js.executeScript("arguments[0].scrollIntoView(true);", sixthScrollAddress2);
-//	Thread.sleep(4000);
-//	}
-//	
-//	public void enterSixthApartment() {
-//		sixthAddress2.click();
-//		sixthAddress2.sendKeys("Utkarsh");
-//	}
-	
-//	public void enterSixthCity() {
-//		sixthCity.click();
-//		sixthCity.sendKeys("Anchorage");
-//	}
-//	
-//	public void enterSixthZipcodet() throws InterruptedException {
-//		sixthZipcode.click();
-//		sixthZipcode.sendKeys("99501");
-//		Thread.sleep(5000);
-//	}
-//	
-//	public void cilckSixthContinue() throws InterruptedException {
-//		System.out.println("Pre-Clicked");
-//		sixthContinue.click();
-//		System.out.println("Clicked");
-//		Thread.sleep(10000);
-//		
-//	}
-//	
-//	public void clickSurlelacAgain() throws InterruptedException {	
-//		surlelac.click();
-//		Thread.sleep(10000);
-//	}	
-	
-	
-	
-	
+													
 	
 }
 

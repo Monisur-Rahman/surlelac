@@ -20,6 +20,7 @@ public class TestCollectionPage extends Base_test
 		CollectionPage cp = new CollectionPage(driver);
 		Form_Data fd = new Form_Data(driver);
 		
+		cp.closePop();
 		 boolean checkClickFirstProduct = cp.clickFirstProduct();
 		 Assert.assertEquals(checkClickFirstProduct, true,"failed  to click on firstProduct");
 //		 ExtentReport.test.log(Status.PASS," Click first Product");
@@ -29,7 +30,7 @@ public class TestCollectionPage extends Base_test
 //		cp.scrollAddtoCart();
 		boolean selectXlSize = cp.xlargeSizeProduct();
 		Assert.assertEquals(selectXlSize, true, "failed to click on XL size");
-//		cp.scrollAddtoCart1();
+		cp.scrollAddtoCart1();
 		boolean checkAddToCart = cp.addtoCart();
 //		Base_test.takeSnapShot(driver);
 		Assert.assertEquals(checkAddToCart, true,"failed to click on AddToCart");
