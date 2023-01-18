@@ -169,11 +169,13 @@ public class CollectionPage {
 	{
 		boolean result = false;
 		try {
+			Thread.sleep(3000);
 			Base_test.waitExplicitMethod(driver, addtoCart);
 //			System.out.println("Hi");
 			addtoCart.click();
+//			System.out.println("clicked on ADD2CART");
 			TestUtil.log().info("click on addToCart");
-			Base_test.waitExplicitMethod(driver, addtoCart);
+//			Base_test.waitExplicitMethod(driver, addtoCart);
 			ExtentReport.test.log(Status.PASS," Click on addtoCart");
 			result = true;
 		}
